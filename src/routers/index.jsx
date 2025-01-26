@@ -4,6 +4,8 @@ import NotFound from '../components/errors/not-found'
 import Home from '../pages/home'
 import Dashboard from '../pages/admin/dashboard'
 import Login from '../pages/auth/login'
+import AdminLayout from '../layouts/admin-layout'
+import Products from '../pages/admin/products'
 
 const router = createBrowserRouter([
   {
@@ -19,7 +21,18 @@ const router = createBrowserRouter([
   },
   {
     path: '/admin',
-    element: <Dashboard />,
+    element: <AdminLayout />,
+    errorElement: <NotFound />,
+    children: [
+      {
+        path: '/admin',
+        element: <Dashboard />,
+      },
+      {
+        path: '/admin/products',
+        element: <Products />,
+      },
+    ],
   },
   {
     path: '/login',

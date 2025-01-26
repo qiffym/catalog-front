@@ -57,7 +57,7 @@ export function AuthProvider({ children }) {
 
   const logout = async () => {
     localStorage.removeItem('token')
-    localStorage.removeItem('username')
+    localStorage.removeItem('user')
 
     dispatch({ type: 'LOGOUT' })
   }

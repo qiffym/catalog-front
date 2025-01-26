@@ -3,7 +3,7 @@ export function FilterButton() {
     <div className="dropdown dropdown-end">
       <div className="tooltip" data-tip="Filter">
         <div className="indicator">
-          <span className="badge indicator-item badge-primary right-2 top-1">2</span>
+          <span className="badge indicator-item badge-primary right-2 top-1"></span>
           <div tabIndex={0} role="button" className="btn btn-outline input input-bordered m-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
