@@ -2,12 +2,20 @@ import { Header } from '../../../layouts/partials/header'
 import { SearchInput } from '../../../components/search-input'
 import { FilterButton } from '../../../components/filter-button'
 import { useProduct } from '../../../context/product-context'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import formatToIDR from '../../../utils/formatToIDR'
 import formatNumberInIndonesia from '../../../utils/formatToNumberInIndonesia'
 
 export default function Products() {
   const { products, fetchProduct, deleteProduct } = useProduct()
+
+  const [search, setSearch] = useState('')
+  const [category, setCategory] = useState('')
+  const [filter, setFilter] = useState('')
+
+  useEffect(() => {
+    fetchProduct({ size: 9, search, category, filter })
+  }, [search, category, filter])
 
   useEffect(() => {
     fetchProduct({ size: 9 })
@@ -56,8 +64,8 @@ export default function Products() {
 
       <div className="flex h-fit w-full flex-col space-y-3 rounded-2xl border bg-base-100 py-2">
         <div className="flex w-full items-center gap-2 px-4 py-2">
-          <SearchInput />
-          <FilterButton />
+          <SearchInput setSearch={setSearch} />
+          <FilterButton setFilter={setFilter} />
         </div>
         <div className="overflow-x-auto">
           <table className="table">
@@ -81,7 +89,7 @@ export default function Products() {
                 <tr key={index}>
                   <th>{index + 1}</th>
                   <td>
-                    Zemlak, Daniel and Leannon
+                    {product.title}
                     <br />
                     <a href="#" target="_blank" rel="noopener noreferrer" className="link link-primary text-xs">
                       Desktop Support Technician
