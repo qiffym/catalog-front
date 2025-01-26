@@ -14,7 +14,8 @@ export default function Products() {
   const [filter, setFilter] = useState('')
 
   useEffect(() => {
-    fetchProduct({ size: 9, search, category, filter })
+    setSearch('')
+    fetchProduct({ size: 9, search, category, filter, sort: filter })
   }, [search, category, filter])
 
   useEffect(() => {

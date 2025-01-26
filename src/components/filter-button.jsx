@@ -26,16 +26,16 @@ export function FilterButton({ setFilter }) {
         </div>
       </div>
       <ul tabIndex={0} className="menu dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 shadow">
-        <li>
+        <li onClick={() => setFilter('latest')}>
           <a>Terbaru</a>
         </li>
-        <li>
+        <li onClick={() => setFilter('bestsellers')}>
           <a>Terlaris</a>
         </li>
-        <li>
+        <li onClick={() => setFilter('asc')}>
           <a>A - Z</a>
         </li>
-        <li>
+        <li onClick={() => setFilter('desc')}>
           <a>Z -A</a>
         </li>
       </ul>

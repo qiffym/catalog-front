@@ -16,13 +16,13 @@ export function Navbar() {
   }
 
   useEffect(() => {
-    fetchProduct({ size: 9, search, category, filter })
+    fetchProduct({ size: 9, search, category, sort: filter })
   }, [search, category, filter])
 
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
-        <Tabs activeTab={activeTab} setActiveTab={handleTabChange} />
+        <Tabs activeTab={activeTab} setActiveTab={handleTabChange} setCategory={setCategory} />
       </div>
       <div className="flex-none gap-2">
         <SearchInput setSearch={setSearch} />

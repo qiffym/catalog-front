@@ -53,12 +53,12 @@ function productReducer(state, action) {
 export function ProductProvider({ children }) {
   const [state, dispatch] = useReducer(productReducer, initialState)
 
-  const fetchProduct = async ({ page = 1, size = 10, category, search }) => {
+  const fetchProduct = async ({ page = 1, size = 10, category, search, sort }) => {
     try {
       const { data } = await axiosInstance.get(
         `/products?page=${page}&size=${size}${search ? `&search=${search}` : ''}${
           category ? `&category=${category}` : ''
-        }`
+        }${sort ? `&sort=${sort}` : ''}`
       )
       dispatch({ type: 'FETCH_PRODUCT', payload: data.data })
     } catch (error) {
