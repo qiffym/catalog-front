@@ -1,4 +1,4 @@
-export function Tabs({ activeTab, setActiveTab }) {
+export function Tabs({ activeTab, setActiveTab, setCategory }) {
   return (
     <div role="tablist" className="tabs-boxed tabs">
       <a role="tab" className={`tab ${activeTab === 0 ? 'tab-active' : ''}`} onClick={() => setActiveTab(0)}>

@@ -1,16 +1,12 @@
-export function Card() {
+export function Card({ product }) {
   return (
     <div className="card card-compact w-full bg-base-100 shadow-xl">
       <figure>
-        <img
-          src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-          alt="Shoes"
-          className="h-48 w-full object-cover object-center"
-        />
+        <img src={product.imageUrl} alt="Shoes" className="h-48 w-full object-cover object-center" />
       </figure>
       <div className="flex items-start justify-between p-3">
         <div className="flex-1">
-          <h2 className="card-title text-base font-bold">The Best & Freshest Bread in Indonesia</h2>
+          <h2 className="card-title text-base font-bold">{product.title}</h2>
           <p className="text-sm text-gray-500">👍 18 orang memberi like </p>
         </div>
         <div className="flex items-center justify-end gap-1">
@@ -37,7 +33,12 @@ export function Card() {
               ></path>
             </svg>
           </button>
-          <button className="btn btn-square btn-outline btn-info btn-sm">
+          <button
+            className="btn btn-square btn-outline btn-info btn-sm"
+            onClick={() => {
+              window.open(product.link, '_blank')
+            }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"

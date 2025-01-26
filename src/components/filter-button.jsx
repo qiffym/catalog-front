@@ -1,4 +1,4 @@
-export function FilterButton() {
+export function FilterButton({ setFilter }) {
   return (
     <div className="dropdown dropdown-end">
       <div className="tooltip" data-tip="Filter">
