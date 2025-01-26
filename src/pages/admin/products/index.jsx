@@ -7,11 +7,23 @@ import formatToIDR from '../../../utils/formatToIDR'
 import formatNumberInIndonesia from '../../../utils/formatToNumberInIndonesia'
 
 export default function Products() {
-  const { products, fetchProduct } = useProduct()
+  const { products, fetchProduct, deleteProduct } = useProduct()
 
   useEffect(() => {
     fetchProduct({ size: 9 })
   }, [])
+
+  const onConfirmDelete = (id) => {
+    const isConfirm = confirm('Are you sure you want to delete this product?')
+    if (isConfirm) {
+      onHandleDelete(id)
+    }
+  }
+
+  const onHandleDelete = (id) => {
+    deleteProduct(id)
+  }
+
   return (
     <div className="mx-auto w-full space-y-6 px-4">
       <div className="flex items-center justify-between">
@@ -96,7 +108,7 @@ export default function Products() {
                   <td>
                     <div className="flex items-center gap-2">
                       <div className="tooltip" data-tip="Edit">
-                        <button className="btn btn-square btn-warning btn-sm">
+                        <button className="btn btn-square btn-warning btn-sm" onClick={() => {}}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="16"
@@ -115,7 +127,7 @@ export default function Products() {
                         </button>
                       </div>
                       <div className="tooltip" data-tip="Delete">
-                        <button className="btn btn-square btn-error btn-sm">
+                        <button className="btn btn-square btn-error btn-sm" onClick={() => onConfirmDelete(product.id)}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="16"
