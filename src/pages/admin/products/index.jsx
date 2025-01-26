@@ -92,12 +92,17 @@ export default function Products() {
                   <td>
                     {product.title}
                     <br />
-                    <a href="#" target="_blank" rel="noopener noreferrer" className="link link-primary text-xs">
-                      Desktop Support Technician
+                    <a
+                      href={product.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="link link-primary text-xs"
+                    >
+                      {product.link}
                     </a>
                   </td>
                   <td>
-                    <img src={product.imageUrl} alt="thumbnail" className="h-24 object-cover object-center" />
+                    <img src={product.imageUrl} alt="thumbnail" className="h-24 w-32 object-cover object-center" />
                   </td>
                   <td>{product.category}</td>
                   <td>{product.description}</td>

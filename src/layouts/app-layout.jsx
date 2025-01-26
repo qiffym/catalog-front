@@ -6,7 +6,7 @@ import { HeroSection } from '../components/hero-section'
 export default function AppLayout() {
   return (
     <>
-      {/* <HeroSection /> */}
+      <HeroSection />
       <div className="mx-auto max-w-7xl pt-6">
         <Navbar />
         <Outlet />

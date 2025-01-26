@@ -16,7 +16,7 @@ export default function AdminLayout() {
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col items-center justify-center bg-gradient-to-b from-base-100 from-80% to-base-200 lg:items-start lg:justify-normal">
+      <div className="drawer-content flex flex-col items-center justify-center bg-gradient-to-t from-base-100 from-80% to-base-200 lg:items-start lg:justify-normal">
         {/* Page content here */}
         <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">
           Open drawer
