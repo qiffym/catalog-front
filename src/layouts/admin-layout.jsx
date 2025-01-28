@@ -2,6 +2,8 @@ import { Outlet, useNavigate } from 'react-router-dom'
 import { SidebarMenu } from './partials/sidebar-menu'
 import { useAuth } from '../context/auth-context'
 import { useEffect } from 'react'
+import { Footer } from './partials/footer'
+import { AppWrapper } from '../components/app-wrapper'
 
 export default function AdminLayout() {
   const { logout, isAuthenticated } = useAuth()
@@ -22,10 +24,11 @@ export default function AdminLayout() {
           Open drawer
         </label>
         <nav className="mt-6 flex w-full items-center justify-end gap-2 px-4">
-          <p className="text-lg italic">Hi, Admin</p>
+          <p className="text-lg font-bold">Hi, Admin</p>
         </nav>
         <div className="divider" />
-        <Outlet />
+        <AppWrapper />
+        <Footer className="pt-10" />
       </div>
       <div className="drawer-side border-r-2">
         <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>

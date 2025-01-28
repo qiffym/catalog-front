@@ -5,9 +5,12 @@ import { useProduct } from '../../../context/product-context'
 import { useEffect, useState } from 'react'
 import formatToIDR from '../../../utils/formatToIDR'
 import formatNumberInIndonesia from '../../../utils/formatToNumberInIndonesia'
+import { useNavigate } from 'react-router-dom'
 
 export default function Products() {
   const { products, fetchProduct, deleteProduct } = useProduct()
+  console.log('🚀 ~ Products ~ products:', products)
+  const navigate = useNavigate()
 
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('')
@@ -40,7 +43,7 @@ export default function Products() {
           title={'Products'}
           description={'This is a page for managing your products. You can add, edit, or delete products here.'}
         />
-        <button className="btn btn-primary rounded-2xl">
+        <button className="btn btn-primary rounded-2xl" onClick={() => navigate('/admin/products/new')}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width={16}
@@ -122,7 +125,12 @@ export default function Products() {
                   <td>
                     <div className="flex items-center gap-2">
                       <div className="tooltip" data-tip="Edit">
-                        <button className="btn btn-square btn-warning btn-sm" onClick={() => {}}>
+                        <button
+                          className="btn btn-square btn-warning btn-sm"
+                          onClick={() => {
+                            navigate(`/admin/products/${product.id}/edit`)
+                          }}
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="16"
