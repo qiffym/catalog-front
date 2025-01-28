@@ -7,9 +7,9 @@ import Login from '../pages/auth/login'
 import AdminLayout from '../layouts/admin-layout'
 import Products from '../pages/admin/products'
 import ProductForm from '../pages/admin/products/form'
+import Categories from '../pages/admin/categories'
 import { getProductById } from '../api/product-loaders'
 import { getCategories } from '../api/category-loaders'
-import Categories from '../pages/admin/categories'
 
 const router = createBrowserRouter([
   {
@@ -26,7 +26,6 @@ const router = createBrowserRouter([
   {
     path: '/admin',
     element: <AdminLayout />,
-    errorElement: <NotFound />,
     children: [
       {
         path: '',
