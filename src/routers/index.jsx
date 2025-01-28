@@ -9,7 +9,7 @@ import Products from '../pages/admin/products'
 import ProductForm from '../pages/admin/products/form'
 import { getProductById } from '../api/product-loaders'
 import { getCategories } from '../api/category-loaders'
-import { AppWrapper } from '../components/app-wrapper'
+import Categories from '../pages/admin/categories'
 
 const router = createBrowserRouter([
   {
@@ -49,6 +49,17 @@ const router = createBrowserRouter([
             path: ':id/edit',
             element: <ProductForm />,
             loader: loadProductAndCategories,
+          },
+        ],
+      },
+      {
+        path: 'categories',
+        element: <Outlet />,
+        children: [
+          {
+            path: '',
+            element: <Categories />,
+            loader: getCategories,
           },
         ],
       },

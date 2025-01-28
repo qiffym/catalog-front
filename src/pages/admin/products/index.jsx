@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom'
 
 export default function Products() {
   const { products, fetchProduct, deleteProduct } = useProduct()
-  console.log('🚀 ~ Products ~ products:', products)
   const navigate = useNavigate()
 
   const [search, setSearch] = useState('')

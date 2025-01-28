@@ -3,7 +3,7 @@ import { SidebarMenu } from './partials/sidebar-menu'
 import { useAuth } from '../context/auth-context'
 import { useEffect } from 'react'
 import { Footer } from './partials/footer'
-import { AppWrapper } from '../components/app-wrapper'
+import AppWrapper from '../components/app-wrapper'
 
 export default function AdminLayout() {
   const { logout, isAuthenticated } = useAuth()
@@ -27,7 +27,9 @@ export default function AdminLayout() {
           <p className="text-lg font-bold">Hi, Admin</p>
         </nav>
         <div className="divider" />
-        <AppWrapper />
+        <AppWrapper>
+          <Outlet />
+        </AppWrapper>
         <Footer className="pt-10" />
       </div>
       <div className="drawer-side border-r-2">
