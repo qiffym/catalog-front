@@ -1,4 +1,4 @@
-export function SortButton() {
+export function SortButton({ setSort }) {
   return (
     <div className="dropdown dropdown-end">
       <div className="tooltip" data-tip="Filter">
@@ -22,16 +22,25 @@ export function SortButton() {
         </div>
       </div>
       <ul tabIndex={0} className="menu dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 shadow">
-        <li onClick={() => {}}>
+        <li
+          onClick={() => {
+            setSort('latest')
+          }}
+        >
           <a>Terbaru</a>
         </li>
-        <li onClick={() => {}}>
-          <a>Terlaris</a>
-        </li>
-        <li onClick={() => {}}>
+        <li
+          onClick={() => {
+            setSort('asc')
+          }}
+        >
           <a>A - Z</a>
         </li>
-        <li onClick={() => {}}>
+        <li
+          onClick={() => {
+            setSort('desc')
+          }}
+        >
           <a>Z -A</a>
         </li>
       </ul>

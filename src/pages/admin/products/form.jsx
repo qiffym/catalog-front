@@ -58,7 +58,9 @@ export default function ProductForm() {
       successToast(response.message)
       navigate('/admin/products', { replace: true })
     } catch (error) {
-      errorToast('Error adding product')
+      errorToast(
+        `Error adding product${error?.data?.error && error?.data?.message != 'Internal Server Error' ? ': ' + error?.data?.error : ''}`
+      )
       console.error(error)
     } finally {
       setLoading(false)

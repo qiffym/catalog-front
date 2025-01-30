@@ -11,15 +11,17 @@ export default function Categories() {
   const { data: initialCategories } = useLoaderData()
   const [categories, setCategories] = useState(initialCategories)
   const [selectedCategory, setSelectedCategory] = useState(null)
+  const [search, setSearch] = useState('')
+  const [sort, setSort] = useState('')
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const response = await getCategories()
+      const response = await getCategories({ search, sort })
       setCategories(response.data)
     }
 
     fetchCategories()
-  }, [selectedCategory])
+  }, [search, sort])
 
   const handleAddClick = () => {
     setSelectedCategory(null)
@@ -77,8 +79,8 @@ export default function Categories() {
 
       <div className="flex h-fit w-full flex-col space-y-3 rounded-2xl border bg-base-100 py-2">
         <div className="flex w-full items-center gap-2 px-4 py-2">
-          <SearchInput />
-          <SortButton />
+          <SearchInput setSearch={setSearch} />
+          <SortButton setSort={setSort} />
         </div>
 
         <div className="overflow-x-auto">

@@ -1,15 +1,19 @@
 import axiosInstance from './axios'
 
-export const getCategories = async () => {
-  console.log('getCategories called')
-
+export const getCategories = async ({ page, size, search, sort }) => {
   try {
-    const response = await axiosInstance.get('/categories')
-    if (!response.data) {
+    const params = new URLSearchParams()
+    if (page) params.append('page', page)
+    if (size) params.append('size', size)
+    if (search) params.append('search', search)
+    if (sort) params.append('sort', sort)
+
+    const { data } = await axiosInstance.get('/categories', { params })
+    if (!data) {
       throw new Response('No data received', { status: 404 })
     }
-    console.log('Categories loaded:', response.data) // Debugging
-    return response.data
+    console.log('Categories loaded:', data) // Debugging
+    return data
   } catch (error) {
     console.error('Error in getCategories:', error)
     throw new Response('Failed to fetch categories', { status: 500 })

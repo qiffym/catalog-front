@@ -18,10 +18,6 @@ export default function Products() {
     fetchProduct({ size: 9, search, sort: filter })
   }, [search, filter])
 
-  useEffect(() => {
-    fetchProduct({ size: 9 })
-  }, [])
-
   const onConfirmDelete = (id) => {
     const isConfirm = confirm('Are you sure you want to delete this product?')
     if (isConfirm) {
