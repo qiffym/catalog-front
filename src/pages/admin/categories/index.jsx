@@ -12,7 +12,7 @@ export default function Categories() {
   const [categories, setCategories] = useState(initialCategories)
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [search, setSearch] = useState('')
-  const [sort, setSort] = useState('')
+  const [sort, setSort] = useState('latest')
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -80,7 +80,7 @@ export default function Categories() {
       <div className="flex h-fit w-full flex-col space-y-3 rounded-2xl border bg-base-100 py-2">
         <div className="flex w-full items-center gap-2 px-4 py-2">
           <SearchInput setSearch={setSearch} />
-          <SortButton setSort={setSort} />
+          <SortButton setSort={setSort} sort={sort} />
         </div>
 
         <div className="overflow-x-auto">

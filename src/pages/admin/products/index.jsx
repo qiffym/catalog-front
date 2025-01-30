@@ -13,7 +13,7 @@ export default function Products() {
   const navigate = useNavigate()
 
   const [search, setSearch] = useState('')
-  const [filter, setFilter] = useState('')
+  const [filter, setFilter] = useState('latest')
   const [page, setPage] = useState(1)
 
   useEffect(() => {
@@ -75,7 +75,7 @@ export default function Products() {
       <div className="flex h-fit w-full flex-col space-y-3 rounded-2xl border bg-base-100 py-2">
         <div className="flex w-full items-center gap-2 px-4 py-2">
           <SearchInput setSearch={setSearch} />
-          <FilterButton setFilter={setFilter} />
+          <FilterButton setSort={setFilter} sort={filter} />
         </div>
         <div className="overflow-x-auto">
           <table className="table">

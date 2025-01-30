@@ -8,7 +8,7 @@ export function Navbar() {
   const [activeTab, setActiveTab] = useState(0)
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('')
-  const [filter, setFilter] = useState('')
+  const [filter, setFilter] = useState('latest')
   const { fetchProduct } = useProduct()
 
   const handleTabChange = (tab) => {
@@ -26,7 +26,7 @@ export function Navbar() {
       </div>
       <div className="flex-none gap-2">
         <SearchInput setSearch={setSearch} />
-        <FilterButton setFilter={setFilter} />
+        <FilterButton setSort={setFilter} sort={filter} />
       </div>
     </div>
   )

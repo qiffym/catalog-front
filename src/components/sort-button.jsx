@@ -1,4 +1,4 @@
-export function SortButton({ setSort }) {
+export function SortButton({ setSort, sort }) {
   return (
     <div className="dropdown dropdown-end">
       <div className="tooltip" data-tip="Filter">
@@ -26,6 +26,7 @@ export function SortButton({ setSort }) {
           onClick={() => {
             setSort('latest')
           }}
+          className={sort === 'latest' ? 'rounded-md bg-primary text-primary-content' : ''}
         >
           <a>Terbaru</a>
         </li>
@@ -33,6 +34,7 @@ export function SortButton({ setSort }) {
           onClick={() => {
             setSort('asc')
           }}
+          className={sort === 'asc' ? 'rounded-md bg-primary text-primary-content' : ''}
         >
           <a>A - Z</a>
         </li>
@@ -40,6 +42,7 @@ export function SortButton({ setSort }) {
           onClick={() => {
             setSort('desc')
           }}
+          className={sort === 'desc' ? 'rounded-md bg-primary text-primary-content' : ''}
         >
           <a>Z -A</a>
         </li>

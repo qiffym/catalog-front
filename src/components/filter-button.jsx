@@ -1,4 +1,4 @@
-export function FilterButton({ setFilter }) {
+export function FilterButton({ sort, setSort }) {
   return (
     <div className="dropdown dropdown-end">
       <div className="tooltip" data-tip="Filter">
@@ -23,16 +23,28 @@ export function FilterButton({ setFilter }) {
         </div>
       </div>
       <ul tabIndex={0} className="menu dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 shadow">
-        <li onClick={() => setFilter('latest')}>
+        <li
+          onClick={() => setSort('latest')}
+          className={sort === 'latest' ? 'rounded-md bg-primary text-primary-content' : ''}
+        >
           <a>Terbaru</a>
         </li>
-        <li onClick={() => setFilter('bestsellers')}>
+        <li
+          onClick={() => setSort('bestsellers')}
+          className={sort === 'bestsellers' ? 'rounded-md bg-primary text-primary-content' : ''}
+        >
           <a>Terlaris</a>
         </li>
-        <li onClick={() => setFilter('asc')}>
+        <li
+          onClick={() => setSort('asc')}
+          className={sort === 'asc' ? 'rounded-md bg-primary text-primary-content' : ''}
+        >
           <a>A - Z</a>
         </li>
-        <li onClick={() => setFilter('desc')}>
+        <li
+          onClick={() => setSort('desc')}
+          className={sort === 'desc' ? 'rounded-md bg-primary text-primary-content' : ''}
+        >
           <a>Z -A</a>
         </li>
       </ul>
