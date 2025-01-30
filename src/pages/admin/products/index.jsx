@@ -13,13 +13,11 @@ export default function Products() {
   const navigate = useNavigate()
 
   const [search, setSearch] = useState('')
-  const [category, setCategory] = useState('')
   const [filter, setFilter] = useState('')
 
   useEffect(() => {
-    setSearch('')
-    fetchProduct({ size: 9, search, category, filter, sort: filter })
-  }, [search, category, filter])
+    fetchProduct({ size: 9, search, sort: filter })
+  }, [search, filter])
 
   useEffect(() => {
     fetchProduct({ size: 9 })
@@ -105,7 +103,11 @@ export default function Products() {
                     </a>
                   </td>
                   <td>
-                    <img src={product.imageUrl} alt="thumbnail" className="h-24 w-32 object-cover object-center" />
+                    <img
+                      src={product?.imagesUrl[0]?.imageUrl}
+                      alt="thumbnail"
+                      className="h-24 w-32 object-cover object-center"
+                    />
                   </td>
                   <td>{product.category}</td>
                   <td>{product.description}</td>

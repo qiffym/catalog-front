@@ -1,17 +1,9 @@
-import { useEffect } from 'react'
 import { Card } from '../components/card'
 import Container from '../components/container'
 import { useProduct } from '../context/product-context'
 
 export default function Home() {
-  const { products, fetchProduct } = useProduct()
-
-  useEffect(() => {
-    fetchProduct({ size: 9 })
-  }, [])
-  useEffect(() => {
-    console.log(products)
-  }, [products])
+  const { products } = useProduct()
 
   return (
     <Container className="min-h-screen">

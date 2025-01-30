@@ -2,7 +2,7 @@ export function Card({ product }) {
   return (
     <div className="card card-compact w-full bg-base-100 shadow-xl">
       <figure>
-        <img src={product.imageUrl} alt="Shoes" className="h-48 w-full object-cover object-center" />
+        <img src={product.imagesUrl[0]?.imageUrl} alt="Shoes" className="h-48 w-full object-cover object-center" />
       </figure>
       <div className="flex items-start justify-between p-3">
         <div className="flex-1">
