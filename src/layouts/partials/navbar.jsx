@@ -23,7 +23,7 @@ export function Navbar() {
   }, [search, category, filter])
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar mb-4 bg-base-100 p-0">
       <div className="flex-1">
         <Tabs activeTab={activeTab} setActiveTab={handleTabChange} setCategory={setCategory} />
       </div>

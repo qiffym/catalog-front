@@ -1,12 +1,23 @@
+import { Link, useNavigate } from 'react-router-dom'
+
 export function Card({ product }) {
+  const navigate = useNavigate()
   return (
-    <div className="card card-compact w-full bg-base-100 shadow-xl">
+    <div
+      className="card card-compact w-full bg-base-100 shadow-xl"
+      role="button"
+      onClick={() => {
+        navigate(`/products/${product.id}`)
+      }}
+    >
       <figure>
-        <img src={product.imagesUrl[0]?.imageUrl} alt="Shoes" className="h-48 w-full object-cover object-center" />
+        <img src={product.imagesUrl[0]?.imageUrl} alt="Shoes" className="h-48 w-full object-cover object-top" />
       </figure>
       <div className="flex items-start justify-between p-3">
         <div className="flex-1">
-          <h2 className="card-title text-base font-bold">{product.title}</h2>
+          <Link to={`/products/${product.id}`}>
+            <h2 className="card-title text-base font-bold">{product.title}</h2>
+          </Link>
           <p className="text-sm text-gray-500">👍 18 orang memberi like </p>
         </div>
         <div className="flex items-center justify-end gap-1">

@@ -8,6 +8,7 @@ import AdminLayout from '../layouts/admin-layout'
 import Products from '../pages/admin/products'
 import ProductForm from '../pages/admin/products/form'
 import Categories from '../pages/admin/categories'
+import Details from '../pages/details'
 import { getProductById } from '../api/product-loaders'
 import { getCategories } from '../api/category-loaders'
 
@@ -20,6 +21,11 @@ const router = createBrowserRouter([
       {
         path: '',
         element: <Home />,
+      },
+      {
+        path: 'products/:id',
+        element: <Details />,
+        loader: getProductById,
       },
     ],
   },

@@ -8,10 +8,10 @@ export function Tabs({ activeTab, setActiveTab, setCategory }) {
     fetchCategory()
   }, [])
   return (
-    <div role="tablist" className="tabs-boxed tabs">
+    <div role="tablist" className="tabs tabs-lifted tabs-lg capitalize">
       <a
         role="tab"
-        className={`tab ${activeTab === 0 ? 'tab-active' : ''}`}
+        className={`tab ${activeTab === 0 ? 'tab-active font-semibold text-primary-content [--tab-bg:oklch(var(--p))] [--tab-border-color:oklch(var(--nc))]' : ''}`}
         onClick={() => {
           setActiveTab(0)
           setCategory(undefined)
@@ -22,7 +22,7 @@ export function Tabs({ activeTab, setActiveTab, setCategory }) {
       {categories.map((category, i) => (
         <a
           role="tab"
-          className={`tab ${activeTab === i + 1 ? 'tab-active' : ''}`}
+          className={`tab ${activeTab === i + 1 ? 'tab-active font-semibold text-primary-content [--tab-bg:oklch(var(--p))] [--tab-border-color:oklch(var(--nc))]' : ''}`}
           onClick={() => {
             setActiveTab(i + 1)
             setCategory(category.category)
