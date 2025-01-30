@@ -9,14 +9,17 @@ export function Navbar() {
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('')
   const [filter, setFilter] = useState('latest')
-  const { fetchProduct } = useProduct()
+  const { fetchProduct, setSearch: setSearchContext, setSort, setPage } = useProduct()
 
   const handleTabChange = (tab) => {
     setActiveTab(tab)
   }
 
   useEffect(() => {
+    setPage(1)
     fetchProduct({ size: 9, search, category, sort: filter })
+    setSearchContext(search)
+    setSort(filter)
   }, [search, category, filter])
 
   return (

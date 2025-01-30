@@ -7,7 +7,10 @@ const initialState = {
   products: [],
   isLoading: true,
   paging: {},
+  page: 1,
   error: null,
+  search: '',
+  sort: 'latest',
 }
 
 function productReducer(state, action) {
@@ -38,6 +41,27 @@ function productReducer(state, action) {
       return {
         ...state,
         products: state.products.filter((product) => product.id !== action.payload),
+        isLoading: false,
+        error: null,
+      }
+    case 'SET_SEARCH':
+      return {
+        ...state,
+        search: action.payload,
+        isLoading: false,
+        error: null,
+      }
+    case 'SET_SORT':
+      return {
+        ...state,
+        sort: action.payload,
+        isLoading: false,
+        error: null,
+      }
+    case 'SET_PAGE':
+      return {
+        ...state,
+        page: action.payload,
         isLoading: false,
         error: null,
       }
@@ -99,12 +123,27 @@ export function ProductProvider({ children }) {
     }
   }
 
+  const setSearch = (search) => {
+    dispatch({ type: 'SET_SEARCH', payload: search })
+  }
+
+  const setSort = (sort) => {
+    dispatch({ type: 'SET_SORT', payload: sort })
+  }
+
+  const setPage = (page) => {
+    dispatch({ type: 'SET_PAGE', payload: page })
+  }
+
   const value = {
     ...state,
     fetchProduct,
     addProduct,
     updateProduct,
     deleteProduct,
+    setSearch,
+    setSort,
+    setPage,
   }
 
   return <ProductContext.Provider value={value}>{children}</ProductContext.Provider>

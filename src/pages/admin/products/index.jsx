@@ -184,13 +184,16 @@ export default function Products() {
             </tbody>
           </table>
         </div>
+        {products.length === 0 && <p className="text-center text-base font-extralight">No products found</p>}
       </div>
-      <Paging
-        totalPage={paging.totalPage}
-        page={page}
-        handleNextPage={handleNextPage}
-        handlePrevPage={handlePrevPage}
-      />
+      {paging.totalPage > 1 && (
+        <Paging
+          totalPage={paging.totalPage}
+          page={page}
+          handleNextPage={handleNextPage}
+          handlePrevPage={handlePrevPage}
+        />
+      )}
     </div>
   )
 }
