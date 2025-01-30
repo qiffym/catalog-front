@@ -6,6 +6,7 @@ const ProductContext = createContext(null)
 const initialState = {
   products: [],
   isLoading: true,
+  paging: {},
   error: null,
 }
 
@@ -14,7 +15,8 @@ function productReducer(state, action) {
     case 'FETCH_PRODUCT':
       return {
         ...state,
-        products: action.payload,
+        products: action.payload.data,
+        paging: action.payload.paging,
         isLoading: false,
         error: null,
       }
@@ -60,7 +62,7 @@ export function ProductProvider({ children }) {
           category ? `&category=${category}` : ''
         }${sort ? `&sort=${sort}` : ''}`
       )
-      dispatch({ type: 'FETCH_PRODUCT', payload: data.data })
+      dispatch({ type: 'FETCH_PRODUCT', payload: data })
     } catch (error) {
       console.error('Error fetching product', error)
       dispatch({ type: 'SET_ERROR', payload: error.message })

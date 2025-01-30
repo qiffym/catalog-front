@@ -6,16 +6,19 @@ import { useEffect, useState } from 'react'
 import formatToIDR from '../../../utils/formatToIDR'
 import formatNumberInIndonesia from '../../../utils/formatToNumberInIndonesia'
 import { useNavigate } from 'react-router-dom'
+import Paging from '../../../components/paging'
 
 export default function Products() {
-  const { products, fetchProduct, deleteProduct } = useProduct()
+  const { products, fetchProduct, deleteProduct, paging } = useProduct()
   const navigate = useNavigate()
 
   const [search, setSearch] = useState('')
   const [filter, setFilter] = useState('')
+  const [page, setPage] = useState(1)
 
   useEffect(() => {
     fetchProduct({ size: 9, search, sort: filter })
+    setPage(1)
   }, [search, filter])
 
   const onConfirmDelete = (id) => {
@@ -27,6 +30,16 @@ export default function Products() {
 
   const onHandleDelete = (id) => {
     deleteProduct(id)
+  }
+
+  const handleNextPage = () => {
+    setPage((prevPage) => prevPage + 1)
+    fetchProduct({ page: page + 1, size: 9, search, sort: filter })
+  }
+
+  const handlePrevPage = () => {
+    setPage((prevPage) => prevPage - 1)
+    fetchProduct({ page: page - 1, size: 9, search, sort: filter })
   }
 
   return (
@@ -172,6 +185,12 @@ export default function Products() {
           </table>
         </div>
       </div>
+      <Paging
+        totalPage={paging.totalPage}
+        page={page}
+        handleNextPage={handleNextPage}
+        handlePrevPage={handlePrevPage}
+      />
     </div>
   )
 }
