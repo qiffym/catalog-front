@@ -1,6 +1,7 @@
 import axiosInstance from './axios'
 
-export const getCategories = async ({ page, size, search, sort }) => {
+export const getCategories = async (queryParams = {}) => {
+  const { page, size, search, sort } = queryParams
   try {
     const params = new URLSearchParams()
     if (page) params.append('page', page)
