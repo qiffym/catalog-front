@@ -42,7 +42,7 @@ export default function Categories() {
       setCategories(categories.filter((category) => category.id !== id))
       toast.success('Category deleted successfully')
     } catch (error) {
-      toast.error('Failed to delete category')
+      toast.error(`Failed to delete category${error.data.message ? ': ' + error.data.message : ''}`)
       console.error(error)
     }
   }
