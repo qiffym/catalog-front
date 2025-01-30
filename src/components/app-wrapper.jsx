@@ -1,4 +1,5 @@
 import { useNavigation, Outlet } from 'react-router-dom'
+
 export const AppWrapper = () => {
   const { state } = useNavigation()
 
@@ -12,3 +13,5 @@ export const AppWrapper = () => {
 
   return <Outlet />
 }
+
+export default AppWrapper

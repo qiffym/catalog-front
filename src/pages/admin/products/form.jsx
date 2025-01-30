@@ -56,7 +56,7 @@ export default function ProductForm() {
         ? updateProduct({ request: datas, id: product.id })
         : createProduct({ request: datas }))
       successToast(response.message)
-      navigate('/admin/products')
+      navigate('/admin/products', { replace: true })
     } catch (error) {
       errorToast('Error adding product')
       console.error(error)

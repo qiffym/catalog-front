@@ -7,9 +7,9 @@ import Login from '../pages/auth/login'
 import AdminLayout from '../layouts/admin-layout'
 import Products from '../pages/admin/products'
 import ProductForm from '../pages/admin/products/form'
+import Categories from '../pages/admin/categories'
 import { getProductById } from '../api/product-loaders'
 import { getCategories } from '../api/category-loaders'
-import { AppWrapper } from '../components/app-wrapper'
 
 const router = createBrowserRouter([
   {
@@ -26,7 +26,6 @@ const router = createBrowserRouter([
   {
     path: '/admin',
     element: <AdminLayout />,
-    errorElement: <NotFound />,
     children: [
       {
         path: '',
@@ -49,6 +48,17 @@ const router = createBrowserRouter([
             path: ':id/edit',
             element: <ProductForm />,
             loader: loadProductAndCategories,
+          },
+        ],
+      },
+      {
+        path: 'categories',
+        element: <Outlet />,
+        children: [
+          {
+            path: '',
+            element: <Categories />,
+            loader: getCategories,
           },
         ],
       },
