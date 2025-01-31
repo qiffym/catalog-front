@@ -149,17 +149,7 @@ export default function Details() {
               {product.link}
             </a>
           </p>
-          <p className="pt-3 text-justify leading-relaxed tracking-wide">
-            {product.description}
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam beatae similique illum mollitia
-            exercitationem repellendus, error voluptatum quasi quo perspiciatis deleniti explicabo aspernatur, enim
-            voluptates iure itaque, ipsa quam iste dolore. Debitis dicta explicabo tempora fugit qui minus dolorum
-            labore possimus eligendi cupiditate facilis illo aperiam sequi perspiciatis quibusdam amet veritatis
-            molestiae voluptatem maxime aspernatur quod nostrum, ad repudiandae placeat. Temporibus, velit omnis harum
-            eligendi voluptas odio at fugit quam soluta repudiandae quos aut recusandae ea, fugiat perferendis ipsum, a
-            distinctio labore earum accusamus! Voluptatem architecto amet possimus ipsum nulla distinctio tempora nihil
-            ex, temporibus recusandae veritatis dolor, aliquid voluptate.
-          </p>
+          <p className="pt-3 text-justify leading-relaxed tracking-wide">{product.description}</p>
         </div>
       </div>
     </Container>

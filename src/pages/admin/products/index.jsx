@@ -115,7 +115,9 @@ export default function Products() {
                     />
                   </td>
                   <td>{product.category}</td>
-                  <td>{product.description}</td>
+                  <td>
+                    {product.description.length > 100 ? `${product.description.slice(0, 15)}...` : product.description}
+                  </td>
                   <td>{formatToIDR(product.price)}</td>
                   <td>{formatNumberInIndonesia(product.viewCount)}</td>
                   <td>{formatNumberInIndonesia(product.purchasedCount)}</td>
