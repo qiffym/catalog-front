@@ -8,6 +8,7 @@ const initialState = {
   isLoading: true,
   paging: {},
   page: 1,
+  size: 9,
   error: null,
   search: '',
   sort: 'latest',
@@ -18,8 +19,9 @@ function productReducer(state, action) {
     case 'FETCH_PRODUCT':
       return {
         ...state,
-        products: action.payload.data,
-        paging: action.payload.paging,
+        products: action.payload.data.data,
+        paging: action.payload.data.paging,
+        size: action.payload.size,
         isLoading: false,
         error: null,
       }
@@ -65,6 +67,13 @@ function productReducer(state, action) {
         isLoading: false,
         error: null,
       }
+    case 'SET_SIZE':
+      return {
+        ...state,
+        size: action.payload,
+        isLoading: false,
+        error: null,
+      }
     case 'SET_ERROR':
       return {
         ...state,
@@ -86,7 +95,7 @@ export function ProductProvider({ children }) {
           category ? `&category=${category}` : ''
         }${sort ? `&sort=${sort}` : ''}`
       )
-      dispatch({ type: 'FETCH_PRODUCT', payload: data })
+      dispatch({ type: 'FETCH_PRODUCT', payload: { data, size } })
     } catch (error) {
       dispatch({ type: 'SET_ERROR', payload: error.message })
     }
@@ -104,7 +113,18 @@ export function ProductProvider({ children }) {
   const deleteProduct = async (id) => {
     try {
       await axiosInstance.delete(`/products/${id}`)
-      dispatch({ type: 'DELETE_PRODUCT', payload: id })
+      if (state.paging.total > state.size) {
+        const products = await fetchProduct({
+          page: state.paging.page,
+          size: state.size,
+          search: state.search,
+          sort: state.sort,
+        })
+
+        dispatch({ type: 'FETCH_PRODUCT', payload: products.data })
+      } else {
+        dispatch({ type: 'DELETE_PRODUCT', payload: id })
+      }
     } catch (error) {
       dispatch({ type: 'SET_ERROR', payload: error.message })
     }
@@ -131,6 +151,10 @@ export function ProductProvider({ children }) {
     dispatch({ type: 'SET_PAGE', payload: page })
   }
 
+  const setSize = (size) => {
+    dispatch({ type: 'SET_SIZE', payload: size })
+  }
+
   const value = {
     ...state,
     fetchProduct,
@@ -140,6 +164,7 @@ export function ProductProvider({ children }) {
     setSearch,
     setSort,
     setPage,
+    setSize,
   }
 
   return <ProductContext.Provider value={value}>{children}</ProductContext.Provider>

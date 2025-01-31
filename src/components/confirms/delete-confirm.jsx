@@ -37,7 +37,7 @@ const DeleteConfirm = ({ handleDeleteClick, id, title }) => {
               Cancel
             </button>
             <button
-              className="hover:border-3 border-primaryDanger bg-primaryDanger btn-error ml-4 rounded-full border-2 px-5 py-2 text-sm font-medium tracking-wider text-white shadow-sm transition duration-300 ease-in hover:shadow-2xl"
+              className="hover:border-3 border-primaryDanger bg-primaryDanger ml-4 rounded-full border-2 px-5 py-2 text-sm font-medium tracking-wider text-white shadow-sm transition duration-300 ease-in hover:shadow-2xl"
               onClick={handleConfirm}
             >
               Delete

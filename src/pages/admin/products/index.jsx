@@ -10,18 +10,15 @@ import Paging from '../../../components/paging'
 import DeleteConfirm from '../../../components/confirms/delete-confirm'
 
 export default function Products() {
-  const { products, fetchProduct, deleteProduct, paging } = useProduct()
+  const { products, fetchProduct, deleteProduct, paging, page, setPage, setSearch, search, setSort, sort, size } =
+    useProduct()
   const navigate = useNavigate()
-
-  const [search, setSearch] = useState('')
-  const [filter, setFilter] = useState('latest')
-  const [page, setPage] = useState(1)
   const [selectedIdForDelete, setSelectedIdForDelete] = useState(null)
 
   useEffect(() => {
-    fetchProduct({ size: 9, search, sort: filter })
+    fetchProduct({ size: 10, search, sort })
     setPage(1)
-  }, [search, filter])
+  }, [search, sort])
 
   const onConfirmDelete = (id) => {
     setSelectedIdForDelete(id)
@@ -33,13 +30,13 @@ export default function Products() {
   }
 
   const handleNextPage = () => {
-    setPage((prevPage) => prevPage + 1)
-    fetchProduct({ page: page + 1, size: 9, search, sort: filter })
+    setPage(page + 1)
+    fetchProduct({ page: page + 1, size, search, sort })
   }
 
   const handlePrevPage = () => {
-    setPage((prevPage) => prevPage - 1)
-    fetchProduct({ page: page - 1, size: 9, search, sort: filter })
+    setPage(page - 1)
+    fetchProduct({ page: page - 1, size, search, sort })
   }
 
   return (
@@ -75,7 +72,7 @@ export default function Products() {
       <div className="flex h-fit w-full flex-col space-y-3 rounded-2xl border bg-base-100 py-2">
         <div className="flex w-full items-center gap-2 px-4 py-2">
           <SearchInput setSearch={setSearch} />
-          <FilterButton setSort={setFilter} sort={filter} />
+          <FilterButton setSort={setSort} sort={sort} />
         </div>
         <div className="overflow-x-auto">
           <table className="table">
