@@ -4,6 +4,7 @@ import { Header } from '../../../layouts/partials/header'
 import { useDropzone } from 'react-dropzone'
 import { createProduct, updateProduct } from '../../../api/product-loaders'
 import { toast } from 'react-toastify'
+import deleteImage from '../../../api/image-api'
 
 export default function ProductForm() {
   const { product, categories } = useLoaderData() || {}
@@ -15,7 +16,7 @@ export default function ProductForm() {
     purchasedCount: product?.purchasedCount || '',
     link: product?.link || '',
     price: product?.price || '',
-    images: product?.imagesUrl ? product.imagesUrl.map((data) => ({ preview: data.imageUrl })) : [],
+    images: product?.imagesUrl ? product.imagesUrl.map((data) => ({ id: data.id, preview: data.imageUrl })) : [],
   })
   const [loading, setLoading] = useState(false)
 
@@ -212,9 +213,15 @@ function ImageDropzone({ images, setImages }) {
     [isFocused, isDragAccept, isDragReject]
   )
 
-  const handleRemoveImage = (index) => {
-    const updatedImages = images.filter((_, i) => i !== index)
-    setImages(updatedImages)
+  const handleRemoveImage = async (index) => {
+    try {
+      console.log('images', images)
+      if (images[index].id) await deleteImage(images[index].id)
+      const updatedImages = images.filter((_, i) => i !== index)
+      setImages(updatedImages)
+    } catch (error) {
+      toast.error(`Failed to delete image${error.data.message ? ': ' + error.data.message : ''}`)
+    }
   }
 
   return (
