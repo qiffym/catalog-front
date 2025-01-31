@@ -1,5 +1,6 @@
 const DeleteConfirm = ({ handleDeleteClick, id, title }) => {
-  const handleConfirm = () => {
+  const handleConfirm = (e) => {
+    e.preventDefault()
     handleDeleteClick(id)
     document.getElementById('delete_confirm').close()
   }

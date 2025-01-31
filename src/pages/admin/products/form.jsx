@@ -4,6 +4,7 @@ import { Header } from '../../../layouts/partials/header'
 import { useDropzone } from 'react-dropzone'
 import { createProduct, updateProduct } from '../../../api/product-loaders'
 import { toast } from 'react-toastify'
+import DeleteConfirm from '../../../components/confirms/delete-confirm'
 import deleteImage from '../../../api/image-api'
 
 export default function ProductForm() {
@@ -213,15 +214,29 @@ function ImageDropzone({ images, setImages }) {
     [isFocused, isDragAccept, isDragReject]
   )
 
-  const handleRemoveImage = async (index) => {
+  const [selectedIdForDeleteImage, setSelectedIdForDeleteImage] = useState(null)
+  const [selectedIndexForDeleteImage, setSelectedIndexForDeleteImage] = useState(null)
+
+  const confirmOnDeleteImage = (index) => {
+    setSelectedIdForDeleteImage(images[index]?.id)
+    setSelectedIndexForDeleteImage(index)
+    document.getElementById('delete_confirm').showModal()
+  }
+
+  const handleDeleteImage = async (id) => {
     try {
-      console.log('images', images)
-      if (images[index].id) await deleteImage(images[index].id)
-      const updatedImages = images.filter((_, i) => i !== index)
-      setImages(updatedImages)
+      if (id) {
+        await deleteImage(id)
+      }
+      handleRemoveImage()
     } catch (error) {
       toast.error(`Failed to delete image${error.data.message ? ': ' + error.data.message : ''}`)
     }
+  }
+
+  const handleRemoveImage = () => {
+    const updatedImages = images.filter((_, i) => i !== selectedIndexForDeleteImage)
+    setImages(updatedImages)
   }
 
   return (
@@ -240,7 +255,7 @@ function ImageDropzone({ images, setImages }) {
               <button
                 type="button"
                 className="btn btn-circle btn-error indicator-item no-animation btn-sm right-3 top-2"
-                onClick={() => handleRemoveImage(index)}
+                onClick={() => confirmOnDeleteImage(index)}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -258,6 +273,7 @@ function ImageDropzone({ images, setImages }) {
           </div>
         ))}
       </aside>
+      <DeleteConfirm id={selectedIdForDeleteImage} handleDeleteClick={handleDeleteImage} title={'Image'} />
     </section>
   )
 }
