@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react'
 import { createCategory, updateCategory } from '../../api/category-loaders'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
 
-export function FormCategoryModal({ category, setCategory }) {
+export function FormCategoryModal({ category, categories, setCategory, setCategories }) {
   const [formData, setFormData] = useState({ id: '', name: '' })
   const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
 
   useEffect(() => {
     setFormData({
@@ -30,14 +28,20 @@ export function FormCategoryModal({ category, setCategory }) {
 
     try {
       const response = category ? await updateCategory({ data, id: category.id }) : await createCategory(data)
-
       toast.success(response.message)
+
+      if (category) {
+        setCategories(categories.map((cat) => (cat.id === category.id ? response.data : cat)))
+      } else {
+        setCategories([response.data, ...categories])
+      }
 
       setCategory(response.data)
       document.getElementById('form_category_modal').close()
     } catch (error) {
-      toast.error('Error!')
-      console.error(error)
+      toast.error(
+        `Error${error?.data?.message && error?.data?.message != 'Internal Server Error' ? ': ' + error?.data?.message : '!'}`
+      )
     } finally {
       setLoading(false)
     }

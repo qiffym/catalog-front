@@ -155,7 +155,12 @@ export default function Categories() {
           </table>
         </div>
       </div>
-      <FormCategoryModal category={selectedCategory} setCategory={setSelectedCategory} />
+      <FormCategoryModal
+        category={selectedCategory}
+        setCategory={setSelectedCategory}
+        setCategories={setCategories}
+        categories={categories}
+      />
     </div>
   )
 }
