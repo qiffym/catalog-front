@@ -88,7 +88,6 @@ export function ProductProvider({ children }) {
       )
       dispatch({ type: 'FETCH_PRODUCT', payload: data })
     } catch (error) {
-      console.error('Error fetching product', error)
       dispatch({ type: 'SET_ERROR', payload: error.message })
     }
   }
@@ -98,7 +97,6 @@ export function ProductProvider({ children }) {
       const { data } = await axiosInstance.post('/products', product)
       dispatch({ type: 'ADD_PRODUCT', payload: data })
     } catch (error) {
-      console.error('Error adding product', error)
       dispatch({ type: 'SET_ERROR', payload: error.message })
     }
   }
@@ -108,7 +106,6 @@ export function ProductProvider({ children }) {
       await axiosInstance.delete(`/products/${id}`)
       dispatch({ type: 'DELETE_PRODUCT', payload: id })
     } catch (error) {
-      console.error('Error deleting product', error)
       dispatch({ type: 'SET_ERROR', payload: error.message })
     }
   }
@@ -118,7 +115,6 @@ export function ProductProvider({ children }) {
       const { data } = await axiosInstance.put(`/products/${id}`, product)
       dispatch({ type: 'UPDATE_PRODUCT', payload: data })
     } catch (error) {
-      console.error('Error updating product', error)
       dispatch({ type: 'SET_ERROR', payload: error.message })
     }
   }

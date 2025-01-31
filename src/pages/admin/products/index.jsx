@@ -7,6 +7,7 @@ import formatToIDR from '../../../utils/formatToIDR'
 import formatNumberInIndonesia from '../../../utils/formatToNumberInIndonesia'
 import { useNavigate } from 'react-router-dom'
 import Paging from '../../../components/paging'
+import DeleteConfirm from '../../../components/confirms/delete-confirm'
 
 export default function Products() {
   const { products, fetchProduct, deleteProduct, paging } = useProduct()
@@ -15,6 +16,7 @@ export default function Products() {
   const [search, setSearch] = useState('')
   const [filter, setFilter] = useState('latest')
   const [page, setPage] = useState(1)
+  const [selectedIdForDelete, setSelectedIdForDelete] = useState(null)
 
   useEffect(() => {
     fetchProduct({ size: 9, search, sort: filter })
@@ -22,10 +24,8 @@ export default function Products() {
   }, [search, filter])
 
   const onConfirmDelete = (id) => {
-    const isConfirm = confirm('Are you sure you want to delete this product?')
-    if (isConfirm) {
-      onHandleDelete(id)
-    }
+    setSelectedIdForDelete(id)
+    document.getElementById('delete_confirm').showModal()
   }
 
   const onHandleDelete = (id) => {
@@ -186,6 +186,7 @@ export default function Products() {
         </div>
         {products.length === 0 && <p className="text-center text-base font-extralight">No products found</p>}
       </div>
+      <DeleteConfirm handleDeleteClick={onHandleDelete} id={selectedIdForDelete} title="product" />
       {paging.totalPage > 1 && (
         <Paging
           totalPage={paging.totalPage}

@@ -6,6 +6,7 @@ import { FormCategoryModal } from '../../../components/modals/form-category-moda
 import { useEffect, useState } from 'react'
 import { deleteCategory, getCategories } from '../../../api/category-loaders'
 import { toast } from 'react-toastify'
+import DeleteConfirm from '../../../components/confirms/delete-confirm'
 
 export default function Categories() {
   const { data: initialCategories } = useLoaderData()
@@ -13,6 +14,7 @@ export default function Categories() {
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [search, setSearch] = useState('')
   const [sort, setSort] = useState('latest')
+  const [selectedIdForDelete, setSelectedIdForDelete] = useState(null)
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -33,17 +35,18 @@ export default function Categories() {
     document.getElementById('form_category_modal').showModal()
   }
 
-  const handleDeleteClick = async (id) => {
-    const isConfirm = window.confirm('Are you sure you want to delete this category?')
-    if (!isConfirm) return
+  const onDeleteClick = (id) => {
+    setSelectedIdForDelete(id)
+    document.getElementById('delete_confirm').showModal()
+  }
 
+  const handleDeleteClick = async (id) => {
     try {
       await deleteCategory(id)
       setCategories(categories.filter((category) => category.id !== id))
       toast.success('Category deleted successfully')
     } catch (error) {
       toast.error(`Failed to delete category${error.data.message ? ': ' + error.data.message : ''}`)
-      console.error(error)
     }
   }
 
@@ -127,10 +130,7 @@ export default function Categories() {
                       </button>
                     </div>
                     <div className="tooltip" data-tip="Delete">
-                      <button
-                        className="btn btn-square btn-error btn-sm"
-                        onClick={() => handleDeleteClick(category.id)}
-                      >
+                      <button className="btn btn-square btn-error btn-sm" onClick={() => onDeleteClick(category.id)}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="16"
@@ -161,6 +161,7 @@ export default function Categories() {
         setCategories={setCategories}
         categories={categories}
       />
+      <DeleteConfirm handleDeleteClick={handleDeleteClick} id={selectedIdForDelete} title={'category'} />
     </div>
   )
 }
